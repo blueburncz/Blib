@@ -1,10 +1,8 @@
-#include "Manager.hpp"
+#include "Scheduler.hpp"
 
 using namespace Jobs;
 
-Manager* Manager::mInstance = nullptr;
-
-Manager::Manager()
+Scheduler::Scheduler()
 {
 	unsigned workers = std::thread::hardware_concurrency();
 	
@@ -19,15 +17,13 @@ Manager::Manager()
 	}
 }
 
-Manager::~Manager()
+Scheduler::~Scheduler()
 {
 	for (auto worker : mWorkers)
 	{
 		delete worker;
 	}
 	mWorkers.clear();
-
-	mJobs.clear();
 
 	while (!mJobsWaiting.empty())
 	{
@@ -44,39 +40,22 @@ Manager::~Manager()
 	}
 }
 
-Manager* Manager::Instance()
+Scheduler& Scheduler::Instance()
 {
-	if (!mInstance)
-	{
-		mInstance = new Manager();
-	}
-	return mInstance;
+	static Scheduler scheduler;
+	return scheduler;
 }
 
-void Manager::RegisterJob(Job* job)
-{
-	std::unique_lock<std::mutex> lock(mMutex);
-	double id = mNextId++;
-	job->mId = id;
-	mJobs[id] = job;
-}
-
-Job* Manager::GetJobById(double id)
-{
-	std::unique_lock<std::mutex> lock(mMutex);
-	return mJobs[id];
-}
-
-void Manager::StartJob(double id)
+void Scheduler::StartJob(Job* job)
 {
 	{
 		std::unique_lock<std::mutex> lock(mMutex);
-		mJobsWaiting.push(mJobs[id]);
+		mJobsWaiting.push(job);
 	}
 	mSemaphore.Release();
 }
 
-Job* Manager::GetJob()
+Job* Scheduler::GetJob()
 {
 	mSemaphore.Acquire();
 	std::unique_lock<std::mutex> lock(mMutex);
@@ -85,14 +64,14 @@ Job* Manager::GetJob()
 	return job;
 }
 
-void Manager::AddFinishedJob(Job* job)
+void Scheduler::AddFinishedJob(Job* job)
 {
 	std::unique_lock<std::mutex> lock(mMutex);
 	job->mFinished = true;
 	mJobsFinished.push(job);
 }
 
-Job* Manager::GetFinishedJob()
+Job* Scheduler::GetFinishedJob()
 {
 	std::unique_lock<std::mutex> lock(mMutex);
 	Job* job = nullptr;
@@ -102,14 +81,4 @@ Job* Manager::GetFinishedJob()
 		mJobsFinished.pop();
 	}
 	return job;
-}
-
-void Manager::DestroyJob(double id)
-{
-	auto it = mJobs.find(id);
-	if (it != mJobs.end())
-	{
-		delete it->second;
-		mJobs.erase(it);
-	}
 }

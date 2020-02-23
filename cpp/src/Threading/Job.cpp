@@ -1,11 +1,11 @@
 #include "Job.hpp"
-#include "Manager.hpp"
 
 using namespace Jobs;
 
+gmstring_t Job::mObjectType = "Job";
+
 Job::Job()
 {
-	Manager::Instance()->RegisterJob(this);
 }
 
 Job::~Job()

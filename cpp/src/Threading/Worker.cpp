@@ -1,10 +1,10 @@
-#include "Manager.hpp"
+#include "Scheduler.hpp"
 #include "Worker.hpp"
 
 using namespace Jobs;
 
-Worker::Worker(Manager* manager)
-	: mManager(manager)
+Worker::Worker(Scheduler* scheduler)
+	: mScheduler(scheduler)
 	, mThread(std::thread(&Worker::Work, this))
 {
 }
@@ -19,8 +19,8 @@ void Worker::Work()
 {
 	while (mRunning)
 	{
-		Job* job = mManager->GetJob();
+		Job* job = mScheduler->GetJob();
 		job->Execute();
-		mManager->AddFinishedJob(job);
+		mScheduler->AddFinishedJob(job);
 	}
 }

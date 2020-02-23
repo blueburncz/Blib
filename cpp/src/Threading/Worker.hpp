@@ -5,19 +5,19 @@
 
 namespace Jobs
 {
-	class Manager;
+	class Scheduler;
 
 	class Worker final
 	{
 	public:
-		Worker(Manager* manager);
+		Worker(Scheduler* scheduler);
 
 		~Worker();
 
 	private:
 		void Work();
 
-		Manager* mManager;
+		Scheduler* mScheduler;
 
 		std::thread mThread;
 
