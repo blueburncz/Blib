@@ -26,6 +26,9 @@ namespace Jobs
 		/** Gets a job for a worker. Blocks until there is some available. */
 		Job* GetJob();
 
+		/** Removes job from queue. */
+		bool RemoveJob(Job* job);
+
 		/** Adds finished job. */
 		void AddFinishedJob(Job* job);
 
@@ -36,7 +39,7 @@ namespace Jobs
 		Scheduler();
 
 		/** Jobs to be executed. */
-		std::queue<Job*> mJobsWaiting;
+		std::vector<Job*> mJobsWaiting;
 
 		/** Finished jobs. */
 		std::queue<Job*> mJobsFinished;

@@ -25,12 +25,11 @@ Scheduler::~Scheduler()
 	}
 	mWorkers.clear();
 
-	while (!mJobsWaiting.empty())
+	for (Job* j : mJobsWaiting)
 	{
-		Job* job = mJobsWaiting.front();
-		mJobsWaiting.pop();
-		delete job;
+		delete j;
 	}
+	mJobsWaiting.clear();
 
 	while (!mJobsFinished.empty())
 	{
@@ -50,7 +49,7 @@ void Scheduler::StartJob(Job* job)
 {
 	{
 		std::unique_lock<std::mutex> lock(mMutex);
-		mJobsWaiting.push(job);
+		mJobsWaiting.push_back(job);
 	}
 	mSemaphore.Release();
 }
@@ -60,8 +59,22 @@ Job* Scheduler::GetJob()
 	mSemaphore.Acquire();
 	std::unique_lock<std::mutex> lock(mMutex);
 	Job* job = mJobsWaiting.front();
-	mJobsWaiting.pop();
+	mJobsWaiting.erase(mJobsWaiting.begin());
 	return job;
+}
+
+bool Scheduler::RemoveJob(Job* job)
+{
+	std::unique_lock<std::mutex> lock(mMutex);
+	auto end = mJobsWaiting.end();
+	auto it = std::find(mJobsWaiting.begin(), end, job);
+	if (it == end)
+	{
+		return false;
+	}
+	mJobsWaiting.erase(it);
+	mSemaphore.Acquire();
+	return true;
 }
 
 void Scheduler::AddFinishedJob(Job* job)

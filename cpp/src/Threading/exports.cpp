@@ -46,13 +46,6 @@ GM_EXPORT gmreal_t b_get_finished_job()
 	return -1.0;
 }
 
-GM_EXPORT gmreal_t b_job_destroy(gmreal_t id)
-{
-	return Destroy(id)
-		? GM_TRUE
-		: GM_FALSE;
-}
-
 GM_EXPORT gmreal_t b_sleep_job_create(gmreal_t duration)
 {
 	SleepJob* sleepJob = CreateObject<SleepJob>();

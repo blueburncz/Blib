@@ -2,10 +2,11 @@
 
 Manager::~Manager()
 {
-	for (auto it = mObjects.begin(); it != mObjects.end(); ++it)
+	for (Object* o : mObjects)
 	{
-		delete it->second;
+		delete o;
 	}
+	mObjects.clear();
 }
 
 Manager& Manager::Instance()
@@ -14,16 +15,21 @@ Manager& Manager::Instance()
 	return manager;
 }
 
-bool Manager::Destroy(gmreal_t id)
+bool Manager::Exists(gmreal_t id) const
+{
+	size_t pos = (size_t)id;
+	if (id < 0.0 || pos >= mObjects.size())
+	{
+		return false;
+	}
+	return mObjects.at(pos) != nullptr;
+}
+
+void Manager::Destroy(gmreal_t id)
 {
 	std::unique_lock<std::mutex> lock(mMutex);
-	auto it = mObjects.find(id);
-	if (it != mObjects.end())
-	{
-		delete it->second;
-		mObjects.erase(it);
-		mIdAvailable.push(id);
-		return true;
-	}
-	return false;
+	size_t pos = (size_t)id;
+	delete mObjects.at(pos);
+	mObjects[pos] = nullptr;
+	mIdAvailable.push(id);
 }

@@ -1,4 +1,5 @@
 #include "Job.hpp"
+#include "Scheduler.hpp"
 
 using namespace Jobs;
 
@@ -10,4 +11,5 @@ Job::Job()
 
 Job::~Job()
 {
+	Scheduler::Instance().RemoveJob(this);
 }
