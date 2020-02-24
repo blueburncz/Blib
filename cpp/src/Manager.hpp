@@ -46,7 +46,7 @@ public:
 	}
 
 	/**
-	 * Gets a object by its id.
+	 * Gets an object by its id.
 	 *
 	 * @param id The id of the object.
 	 *
@@ -64,7 +64,7 @@ public:
 	}
 
 	/**
-	 * Destroys a object.
+	 * Destroys an object.
 	 *
 	 * @param id The id of the object.
 	 *
@@ -75,7 +75,7 @@ public:
 private:
 	Manager() {}
 
-	/** Used for locking structures when adding, getting, removing etc. resources. */
+	/** Used for locking structures when adding, getting, removing etc. objects. */
 	std::mutex mMutex;
 
 	/** The id of the next added object. */
@@ -84,7 +84,7 @@ private:
 	/** Ids available for reuse. */
 	std::queue<gmreal_t> mIdAvailable;
 
-	/** Map of all added resources. */
+	/** Map of all added objects. */
 	std::map<gmreal_t, Object*> mObjects;
 };
 
