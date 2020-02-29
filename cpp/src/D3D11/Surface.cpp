@@ -1,5 +1,3 @@
-#pragma once
-
 #include "Surface.hpp"
 
 using namespace D3D11;
