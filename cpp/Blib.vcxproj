@@ -22,6 +22,8 @@
     <ClCompile Include="src\AStar\exports.cpp" />
     <ClCompile Include="src\AStar\Graph.cpp" />
     <ClCompile Include="src\AStar\Node.cpp" />
+    <ClCompile Include="src\D3D11\exports.cpp" />
+    <ClCompile Include="src\D3D11\Surface.cpp" />
     <ClCompile Include="src\exports.cpp" />
     <ClCompile Include="src\Object.cpp" />
     <ClCompile Include="src\Manager.cpp" />
@@ -35,6 +37,7 @@
     <ClInclude Include="src\AStar\Graph.hpp" />
     <ClInclude Include="src\AStar\Node.hpp" />
     <ClInclude Include="src\common.hpp" />
+    <ClInclude Include="src\D3D11\Surface.hpp" />
     <ClInclude Include="src\Manager.hpp" />
     <ClInclude Include="src\Object.hpp" />
     <ClInclude Include="src\Threading\Job.hpp" />

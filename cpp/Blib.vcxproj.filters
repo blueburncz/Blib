@@ -42,6 +42,9 @@
     <ClInclude Include="src\Threading\Scheduler.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\D3D11\Surface.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Threading\Semaphore.cpp">
@@ -75,6 +78,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\AStar\exports.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\D3D11\exports.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\D3D11\Surface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
