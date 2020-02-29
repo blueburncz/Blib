@@ -19,6 +19,7 @@ GM_EXPORT gmreal_t b_surface_create(gmreal_t width, gmreal_t height, gmreal_t fo
 	if (!surface->Initialize(gDevice, width, height, format))
 	{
 		Destroy(surface);
+		return -1.0;
 	}
 	return surface->GetId();
 }
