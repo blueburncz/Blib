@@ -80,7 +80,7 @@ GM_EXPORT gmreal_t b_set_render_targets(gmreal_t count, gmptr_t targets, gmreal_
 
 	// Set new targets
 	UINT countInt = static_cast<UINT>(count);
-	double* targetIds = reinterpret_cast<double*>(targets);
+	gmreal_t* targetIds = reinterpret_cast<gmreal_t*>(targets);
 	ID3D11RenderTargetView* rtvs[8];
 
 	for (UINT i = 0; i < countInt; ++i)
