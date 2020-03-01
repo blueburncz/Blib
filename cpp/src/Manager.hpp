@@ -33,7 +33,7 @@ public:
 			{
 				id = mIdAvailable.front();
 				mIdAvailable.pop();
-				mObjects[(size_t)id] = object;
+				mObjects[static_cast<size_t>(id)] = object;
 			}
 			else
 			{
@@ -63,7 +63,7 @@ public:
 	T* Get(gmreal_t id)
 	{
 		std::unique_lock<std::mutex> lock(mMutex);
-		return static_cast<T*>(mObjects.at((size_t)id));
+		return static_cast<T*>(mObjects.at(static_cast<size_t>(id)));
 	}
 
 	/**
@@ -95,13 +95,13 @@ private:
  * @return The created object.
  */
 template<class T>
-inline T* CreateObject()
+inline T* BCreateObject()
 {
 	return Manager::Instance().Create<T>();
 }
 
 /** Returns true if object with given id exists. */
-inline bool Exists(gmreal_t id)
+inline bool BExists(gmreal_t id)
 {
 	return Manager::Instance().Exists(id);
 }
@@ -114,19 +114,19 @@ inline bool Exists(gmreal_t id)
  * @return The object with specified id.
  */
 template<class T>
-inline T* GetObject(gmreal_t id)
+inline T* BGetObject(gmreal_t id)
 {
 	return Manager::Instance().Get<T>(id);
 }
 
 /** Destroys the object. */
-inline void Destroy(gmreal_t id)
+inline void BDestroy(gmreal_t id)
 {
 	Manager::Instance().Destroy(id);
 }
 
 /** Destroys the object. */
-inline void Destroy(Object* object)
+inline void BDestroy(Object* object)
 {
 	Manager::Instance().Destroy(object->GetId());
 }

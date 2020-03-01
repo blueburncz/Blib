@@ -1,7 +1,7 @@
 while (true)
 {
 	var _job = b_get_finished_job();
-	if (_job == -1)
+	if (_job == B_ID_NONE)
 	{
 		break;
 	}

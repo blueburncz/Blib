@@ -12,6 +12,25 @@ namespace D3D11
 	public:
 		bool Initialize(ID3D11Device* device, gmreal_t width, gmreal_t height, gmreal_t format);
 
+		ID3D11RenderTargetView* GetRenderTargetView(ID3D11Device* device);
+
+		ID3D11ShaderResourceView* GetShaderResourceView(ID3D11Device* device);
+
+		ID3D11Texture2D* GetTexture() const
+		{
+			return mTexture;
+		}
+
+		gmreal_t GetWidth() const
+		{
+			return mWidth;
+		}
+
+		gmreal_t GetHeight() const
+		{
+			return mHeight;
+		}
+
 	private:
 		friend class Manager;
 
@@ -22,6 +41,10 @@ namespace D3D11
 		static gmstring_t mObjectType;
 
 		ID3D11Texture2D* mTexture = NULL;
+
+		ID3D11RenderTargetView* mRenderTargetView = NULL;
+
+		ID3D11ShaderResourceView* mShaderResourceView = NULL;
 
 		gmreal_t mWidth = 0.0;
 

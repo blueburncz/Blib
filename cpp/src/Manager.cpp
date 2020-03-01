@@ -17,7 +17,7 @@ Manager& Manager::Instance()
 
 bool Manager::Exists(gmreal_t id) const
 {
-	size_t pos = (size_t)id;
+	size_t pos = static_cast<size_t>(id);
 	if (id < 0.0 || pos >= mObjects.size())
 	{
 		return false;
@@ -28,7 +28,7 @@ bool Manager::Exists(gmreal_t id) const
 void Manager::Destroy(gmreal_t id)
 {
 	std::unique_lock<std::mutex> lock(mMutex);
-	size_t pos = (size_t)id;
+	size_t pos = static_cast<size_t>(id);
 	delete mObjects.at(pos);
 	mObjects[pos] = nullptr;
 	mIdAvailable.push(id);

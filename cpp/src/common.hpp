@@ -6,8 +6,10 @@
 
 #define GM_FALSE 0.0
 
+#define ID_NONE -1.0
+
 typedef double gmreal_t;
 
 typedef const char* gmstring_t;
 
-typedef const char* gmptr_t;
+typedef void* gmptr_t;
