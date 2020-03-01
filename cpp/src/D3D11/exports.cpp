@@ -45,33 +45,6 @@ GM_EXPORT gmreal_t b_surface_get_height(gmreal_t id)
 	return BGetObject<Surface>(id)->GetHeight();
 }
 
-GM_EXPORT gmreal_t b_surface_set_target(gmreal_t id)
-{
-	ID3D11RenderTargetView* rtv;
-
-	// Push current targets to the stack
-	ID3D11DepthStencilView* dsv;
-	gContext->OMGetRenderTargets(1, &rtv, &dsv);
-	gRenderTargetStack.push(rtv);
-	gDepthStencilStack.push(dsv);
-
-	// Set new target
-	Surface* surface = BGetObject<Surface>(id);
-	rtv = surface->GetRenderTargetView(gDevice);
-	gContext->OMSetRenderTargets(1, &rtv, NULL);
-	return GM_TRUE;
-}
-
-GM_EXPORT gmreal_t b_surface_reset_target()
-{
-	ID3D11RenderTargetView* rtv = gRenderTargetStack.top();
-	gRenderTargetStack.pop();
-	ID3D11DepthStencilView* dsv = gDepthStencilStack.top();
-	gDepthStencilStack.pop();
-	gContext->OMSetRenderTargets(1, &rtv, dsv);
-	return GM_TRUE;
-}
-
 GM_EXPORT gmreal_t b_surface_clear(gmreal_t id, gmreal_t color, gmreal_t alpha)
 {
 	Surface* surface = BGetObject<Surface>(id);
@@ -87,10 +60,46 @@ GM_EXPORT gmreal_t b_surface_clear(gmreal_t id, gmreal_t color, gmreal_t alpha)
 	return GM_TRUE;
 }
 
-GM_EXPORT gmreal_t b_surface_set_texture(gmreal_t id)
+GM_EXPORT gmreal_t b_surface_set_texture(gmreal_t id, gmreal_t slot)
 {
 	Surface* surface = BGetObject<Surface>(id);
 	ID3D11ShaderResourceView* srv = surface->GetShaderResourceView(gDevice);
-	gContext->PSSetShaderResources(1, 1, &srv);
+	gContext->PSSetShaderResources(static_cast<UINT>(slot), 1, &srv);
+	return GM_TRUE;
+}
+
+GM_EXPORT gmreal_t b_set_render_targets(gmreal_t count, gmptr_t targets, gmreal_t depthstencil)
+{
+	// Push current targets to the stack
+	ID3D11RenderTargetView* rtv;
+	ID3D11DepthStencilView* dsv;
+	// TODO: Take into account number of previous render targets
+	gContext->OMGetRenderTargets(1, &rtv, &dsv);
+	gRenderTargetStack.push(rtv);
+	gDepthStencilStack.push(dsv);
+
+	// Set new targets
+	UINT countInt = static_cast<UINT>(count);
+	double* targetIds = reinterpret_cast<double*>(targets);
+	ID3D11RenderTargetView* rtvs[8];
+
+	for (UINT i = 0; i < countInt; ++i)
+	{
+		rtvs[i] = BGetObject<Surface>(targetIds[i])->GetRenderTargetView(gDevice);
+	}
+
+	// TODO: Create DepthStencil object
+	gContext->OMSetRenderTargets(countInt, rtvs, NULL);
+
+	return GM_TRUE;
+}
+
+GM_EXPORT gmreal_t b_reset_render_targets()
+{
+	ID3D11RenderTargetView* rtv = gRenderTargetStack.top();
+	gRenderTargetStack.pop();
+	ID3D11DepthStencilView* dsv = gDepthStencilStack.top();
+	gDepthStencilStack.pop();
+	gContext->OMSetRenderTargets(1, &rtv, dsv);
 	return GM_TRUE;
 }

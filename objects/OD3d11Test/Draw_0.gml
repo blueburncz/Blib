@@ -8,7 +8,7 @@ gpu_set_zwriteenable(false);
 
 b_surface_clear(surface, c_red, 1);
 
-b_surface_set_target(surface);
+b_set_render_targets(B_ID_NONE, surface);
 
 matrix_set(matrix_world, matrix_build(32, 32, 0, 0, 0, 0, 256, 256, 1));
 
@@ -16,7 +16,7 @@ shader_set(ShTest);
 vertex_submit(vBuffer, pr_trianglelist, -1);
 shader_reset();
 
-b_surface_reset_target();
+b_reset_render_targets();
 
 matrix_set(matrix_world, _matWorld);
 matrix_set(matrix_view, _matView);

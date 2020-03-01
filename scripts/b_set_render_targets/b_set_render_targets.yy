@@ -1,8 +1,8 @@
 {
-    "id": "0020c3d8-78ea-4f82-b2ee-6026724e5558",
+    "id": "5b0da288-833e-43b5-83b4-9c7476280d3d",
     "modelName": "GMScript",
     "mvc": "1.0",
-    "name": "b_surface_set_target",
+    "name": "b_set_render_targets",
     "IsCompatibility": false,
     "IsDnD": false
 }
