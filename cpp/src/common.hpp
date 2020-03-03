@@ -1,5 +1,12 @@
 #pragma once
 
+#ifdef _DEBUG
+#include <iostream>
+#define LOG(m) std::cout << "Blib: " << m << std::endl
+#else // _DEBUG
+#define LOG(m)
+#endif // !_DEBUG
+
 #define GM_EXPORT extern "C" __declspec (dllexport)
 
 #define GM_TRUE 1.0
