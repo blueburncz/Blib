@@ -7,8 +7,9 @@ gpu_set_ztestenable(false);
 gpu_set_zwriteenable(false);
 
 b_surface_clear(surface, c_red, 1);
+b_depthstencil_clear(depthStencil, 1, 0);
 
-b_set_render_targets(B_ID_NONE, surface);
+b_set_render_targets(depthStencil, surface);
 
 matrix_set(matrix_world, matrix_build(0, 0, 0, 0, 0, 0, 2, 2, 1));
 matrix_set(matrix_view, matrix_build_lookat(10, 10, 10, 0, 0, 0, 0, 0, 1));

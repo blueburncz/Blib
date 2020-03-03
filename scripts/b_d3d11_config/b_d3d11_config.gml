@@ -1,7 +1,7 @@
 /// @func b_d3d11_config()
 
 // See https://docs.microsoft.com/en-us/windows/win32/api/dxgiformat/ne-dxgiformat-dxgi_format
-enum B_EDXGIFormat
+enum B_ETextureFormat
 {
 	UNKNOWN                    = 0,
 	R32G32B32A32_TYPELESS      = 1,

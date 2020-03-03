@@ -28,6 +28,33 @@ GM_EXPORT gmreal_t b_d3d11_init(gmptr_t device, gmptr_t context)
 
 ////////////////////////////////////////////////////////////////////////////////
 //
+// DepthStencil
+//
+
+GM_EXPORT gmreal_t b_depthstencil_clear(gmreal_t id, gmreal_t depth, gmreal_t stencil)
+{
+	DepthStencil* depthStencil = BGetObject<DepthStencil>(id);
+	ID3D11DepthStencilView* dsv = depthStencil->GetDepthStencilView(gDevice);
+
+	gContext->ClearDepthStencilView(dsv, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL,
+		static_cast<FLOAT>(depth), static_cast<UINT8>(stencil));
+
+	return GM_TRUE;
+}
+
+GM_EXPORT gmreal_t b_depthstencil_create(gmreal_t width, gmreal_t height, gmreal_t format)
+{
+	DepthStencil* depthStencil = BCreateObject<DepthStencil>();
+	if (!depthStencil->Initialize(gDevice, width, height, format))
+	{
+		BDestroy(depthStencil);
+		return ID_NONE;
+	}
+	return depthStencil->GetId();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//
 // Render target
 //
 
@@ -41,7 +68,7 @@ GM_EXPORT gmreal_t b_reset_render_targets()
 	return GM_TRUE;
 }
 
-GM_EXPORT gmreal_t b_set_render_targets(gmreal_t count, gmptr_t targets, gmreal_t depthstencil)
+GM_EXPORT gmreal_t b_set_render_targets(gmreal_t count, gmptr_t targets, gmreal_t depthStencil)
 {
 	// Push current targets to the stack
 	ID3D11RenderTargetView* rtv;
@@ -71,8 +98,11 @@ GM_EXPORT gmreal_t b_set_render_targets(gmreal_t count, gmptr_t targets, gmreal_
 		viewport.Height = static_cast<FLOAT>(surface->GetHeight());
 	}
 
-	// TODO: Create DepthStencil object
-	gContext->OMSetRenderTargets(countInt, rtvs, NULL);
+	dsv = (depthStencil != ID_NONE)
+		? BGetObject<DepthStencil>(depthStencil)->GetDepthStencilView(gDevice)
+		: NULL;
+
+	gContext->OMSetRenderTargets(countInt, rtvs, dsv);
 	gContext->RSSetViewports(1, &viewport);
 
 	return GM_TRUE;

@@ -423,6 +423,14 @@
             }
         },
         {
+            "Key": "c634e7d0-8e80-4e84-800e-e6d7a04ee178",
+            "Value": {
+                "id": "12ed1ad0-669a-4e04-8fe7-20e103dbc108",
+                "resourcePath": "scripts\\b_depthstencil_clear\\b_depthstencil_clear.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "cc98d028-7bdd-4680-85f3-c87a7baa481e",
             "Value": {
                 "id": "80588edf-9e0a-43af-a210-6456e175473b",
@@ -517,12 +525,22 @@
                 "resourcePath": "options\\mac\\options_mac.yy",
                 "resourceType": "GMMacOptions"
             }
+        },
+        {
+            "Key": "f8a650de-db56-4f40-9443-6c3919e72b7e",
+            "Value": {
+                "id": "828e4c24-6b94-4d2b-b932-3174ed73ecef",
+                "resourcePath": "scripts\\b_depthstencil_create\\b_depthstencil_create.yy",
+                "resourceType": "GMScript"
+            }
         }
     ],
     "script_order": [
         "2f07b5fd-431d-4098-9cb0-d06a669fd880",
         "7413aa7b-d39c-43eb-bad8-5940c5daf52f",
         "033ec94b-349b-4030-998d-baecac109bef",
+        "c634e7d0-8e80-4e84-800e-e6d7a04ee178",
+        "f8a650de-db56-4f40-9443-6c3919e72b7e",
         "f3d64e09-6924-4c71-8882-001ae02ae5df",
         "667f7e91-a6ff-4119-9662-b0854593c6fb",
         "5b0da288-833e-43b5-83b4-9c7476280d3d",

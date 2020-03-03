@@ -18,9 +18,14 @@ vertex_freeze(vBuffer);
 
 surfaceWidth = 256;
 surfaceHeight = 256;
-surface = b_surface_create(surfaceWidth, surfaceHeight, B_EDXGIFormat.R16G16B16A16_FLOAT);
-show_debug_message("Surface: " + string(surface));
-if (surface != B_ID_NONE)
+surface = b_surface_create(surfaceWidth, surfaceHeight, B_ETextureFormat.R16G16B16A16_FLOAT);
+if (surface == B_ID_NONE)
 {
-	show_debug_message("Type: " + string(b_object_get_type(surface)));
+	show_error("Surface create failed!", true);
+}
+
+depthStencil = b_depthstencil_create(surfaceWidth, surfaceHeight, B_ETextureFormat.D24_UNORM_S8_UINT);
+if (depthStencil == B_ID_NONE)
+{
+	show_error("DepthStencil create failed!", true);
 }
