@@ -218,7 +218,7 @@
             "Key": "501dd616-2cd2-47df-aced-7fb95abe4399",
             "Value": {
                 "id": "e118499a-9d44-4816-ab15-16769c858d12",
-                "resourcePath": "datafiles_yy\\Blib.dll.yy",
+                "resourcePath": "datafiles_yy\\Blib\\Blib.dll.yy",
                 "resourceType": "GMIncludedFile"
             }
         },
@@ -259,6 +259,14 @@
             "Value": {
                 "id": "91a90070-ce64-4f5f-a36c-e4d3a98f298d",
                 "resourcePath": "views\\5d54780c-1f0d-4e8f-a03a-dc1984a452e2.yy",
+                "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "607f2acc-2bde-4ce1-8d7c-ac0f447b265a",
+            "Value": {
+                "id": "ed45482f-48dc-4590-ab2b-2145f44b045a",
+                "resourcePath": "views\\607f2acc-2bde-4ce1-8d7c-ac0f447b265a.yy",
                 "resourceType": "GMFolder"
             }
         },
