@@ -10,6 +10,10 @@ DepthStencil::DepthStencil()
 
 DepthStencil::~DepthStencil()
 {
+	if (mDepthStencilView != NULL)
+	{
+		mDepthStencilView->Release();
+	}
 }
 
 bool DepthStencil::Initialize(ID3D11Device* device, gmreal_t width, gmreal_t height, gmreal_t format)
