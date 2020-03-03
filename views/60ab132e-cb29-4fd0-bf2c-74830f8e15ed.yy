@@ -4,18 +4,11 @@
     "mvc": "1.1",
     "name": "60ab132e-cb29-4fd0-bf2c-74830f8e15ed",
     "children": [
+        "80c60b34-2ae9-4e76-9c21-f6f049ab491a",
         "7413aa7b-d39c-43eb-bad8-5940c5daf52f",
         "033ec94b-349b-4030-998d-baecac109bef",
-        "c634e7d0-8e80-4e84-800e-e6d7a04ee178",
-        "f8a650de-db56-4f40-9443-6c3919e72b7e",
-        "f3d64e09-6924-4c71-8882-001ae02ae5df",
         "667f7e91-a6ff-4119-9662-b0854593c6fb",
-        "5b0da288-833e-43b5-83b4-9c7476280d3d",
-        "b824a4f2-ee11-43a8-80a5-99f38aa6c81d",
-        "d3881bc5-0007-4279-9708-9d7d72cfada4",
-        "0020c3d8-78ea-4f82-b2ee-6026724e5558",
-        "125a5858-5b40-4551-97da-c8f5e6fb264f",
-        "2fb8bc85-5007-4e16-8017-12ccc9fe8c95"
+        "5b0da288-833e-43b5-83b4-9c7476280d3d"
     ],
     "filterType": "GMScript",
     "folderName": "D3D11",
