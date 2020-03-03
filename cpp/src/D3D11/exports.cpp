@@ -14,7 +14,7 @@ std::stack<ID3D11RenderTargetView*> gRenderTargetStack;
 
 std::stack<ID3D11DepthStencilView*> gDepthStencilStack;
 
-std::stack<D3D11_VIEWPORT*> gViewportStack;
+std::stack<D3D11_VIEWPORT> gViewportStack;
 
 GM_EXPORT gmreal_t b_d3d11_init(gmptr_t device, gmptr_t context)
 {
@@ -65,6 +65,9 @@ GM_EXPORT gmreal_t b_reset_render_targets()
 	ID3D11DepthStencilView* dsv = gDepthStencilStack.top();
 	gDepthStencilStack.pop();
 	gContext->OMSetRenderTargets(1, &rtv, dsv);
+	D3D11_VIEWPORT viewport = gViewportStack.top();
+	gViewportStack.pop();
+	gContext->RSSetViewports(1, &viewport);
 	return GM_TRUE;
 }
 
@@ -78,6 +81,13 @@ GM_EXPORT gmreal_t b_set_render_targets(gmreal_t count, gmptr_t targets, gmreal_
 	gContext->OMGetRenderTargets(1, &rtv, &dsv);
 	gRenderTargetStack.push(rtv);
 	gDepthStencilStack.push(dsv);
+
+	// TODO: Take into account number of previous viewports
+	D3D11_VIEWPORT viewportPrev;
+	UINT viewportCount = 1;
+
+	gContext->RSGetViewports(&viewportCount, &viewportPrev);
+	gViewportStack.push(viewportPrev);
 
 	// Set new targets
 	UINT countInt = static_cast<UINT>(count);
