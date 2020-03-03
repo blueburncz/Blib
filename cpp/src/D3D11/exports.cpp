@@ -179,6 +179,12 @@ GM_EXPORT gmreal_t b_surface_set_texture(gmreal_t id, gmreal_t slot)
 // Texture
 //
 
+GM_EXPORT gmreal_t b_texture_copy(gmreal_t src, gmreal_t dest)
+{
+	BGetObject<ITexture>(src)->Copy(gContext, BGetObject<ITexture>(dest));
+	return GM_TRUE;
+}
+
 GM_EXPORT gmreal_t b_texture_get_width(gmreal_t id)
 {
 	return BGetObject<ITexture>(id)->GetWidth();

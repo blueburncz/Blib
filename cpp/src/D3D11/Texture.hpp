@@ -27,6 +27,11 @@ namespace D3D11
 			return mHeight;
 		}
 
+		inline void Copy(ID3D11DeviceContext* context, ITexture* dest)
+		{
+			context->CopyResource(dest->mTexture, mTexture);
+		}
+
 	protected:
 		friend class Manager;
 

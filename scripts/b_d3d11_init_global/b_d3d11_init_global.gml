@@ -13,6 +13,7 @@ global.__bSurfaceClear = external_define(BLIB_DLL, "b_surface_clear", dll_cdecl,
 global.__bSurfaceCreate = external_define(BLIB_DLL, "b_surface_create", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 global.__bSurfaceSetTexture = external_define(BLIB_DLL, "b_surface_set_texture", dll_cdecl, ty_real, 2, ty_real, ty_real);
 
+global.__bTextureCopy = external_define(BLIB_DLL, "b_texture_copy", dll_cdecl, ty_real, 2, ty_real, ty_real);
 global.__bTextureGetHeight = external_define(BLIB_DLL, "b_texture_get_height", dll_cdecl, ty_real, 1, ty_real);
 global.__bTextureGetWidth = external_define(BLIB_DLL, "b_texture_get_width", dll_cdecl, ty_real, 1, ty_real);
 
