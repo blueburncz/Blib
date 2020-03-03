@@ -10,7 +10,9 @@ b_surface_clear(surface, c_red, 1);
 
 b_set_render_targets(B_ID_NONE, surface);
 
-matrix_set(matrix_world, matrix_build(32, 32, 0, 0, 0, 0, 256, 256, 1));
+matrix_set(matrix_world, matrix_build(0, 0, 0, 0, 0, 0, 2, 2, 1));
+matrix_set(matrix_view, matrix_build_lookat(10, 10, 10, 0, 0, 0, 0, 0, 1));
+matrix_set(matrix_projection, matrix_build_projection_perspective_fov(60, 1, 1, 8192));
 
 shader_set(ShTest);
 vertex_submit(vBuffer, pr_trianglelist, -1);

@@ -14,6 +14,8 @@ std::stack<ID3D11RenderTargetView*> gRenderTargetStack;
 
 std::stack<ID3D11DepthStencilView*> gDepthStencilStack;
 
+std::stack<D3D11_VIEWPORT*> gViewportStack;
+
 GM_EXPORT gmreal_t b_d3d11_init(gmptr_t device, gmptr_t context)
 {
 	gDevice = reinterpret_cast<ID3D11Device*>(device);
@@ -73,6 +75,7 @@ GM_EXPORT gmreal_t b_set_render_targets(gmreal_t count, gmptr_t targets, gmreal_
 	// Push current targets to the stack
 	ID3D11RenderTargetView* rtv;
 	ID3D11DepthStencilView* dsv;
+
 	// TODO: Take into account number of previous render targets
 	gContext->OMGetRenderTargets(1, &rtv, &dsv);
 	gRenderTargetStack.push(rtv);
@@ -83,13 +86,23 @@ GM_EXPORT gmreal_t b_set_render_targets(gmreal_t count, gmptr_t targets, gmreal_
 	gmreal_t* targetIds = reinterpret_cast<gmreal_t*>(targets);
 	ID3D11RenderTargetView* rtvs[8];
 
+	D3D11_VIEWPORT viewport;
+	viewport.TopLeftX = 0.0f;
+	viewport.TopLeftY = 0.0f;
+	viewport.MinDepth = 0.0f;
+	viewport.MaxDepth = 1.0f;
+
 	for (UINT i = 0; i < countInt; ++i)
 	{
-		rtvs[i] = BGetObject<Surface>(targetIds[i])->GetRenderTargetView(gDevice);
+		Surface* surface = BGetObject<Surface>(targetIds[i]);
+		rtvs[i] = surface->GetRenderTargetView(gDevice);
+		viewport.Width = static_cast<FLOAT>(surface->GetWidth());
+		viewport.Height = static_cast<FLOAT>(surface->GetHeight());
 	}
 
 	// TODO: Create DepthStencil object
 	gContext->OMSetRenderTargets(countInt, rtvs, NULL);
+	gContext->RSSetViewports(1, &viewport);
 
 	return GM_TRUE;
 }
