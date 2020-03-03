@@ -55,13 +55,7 @@ ID3D11RenderTargetView* Surface::GetRenderTargetView(ID3D11Device* device)
 {
 	if (mRenderTargetView == NULL)
 	{
-		HRESULT res = device->CreateRenderTargetView(mTexture, NULL, &mRenderTargetView);
-		if (FAILED(res))
-		{
-#ifdef _DEBUG
-			std::cout << "Blib: Render target view creation failed!" << std::endl;
-#endif // _DEBUG
-		}
+		device->CreateRenderTargetView(mTexture, NULL, &mRenderTargetView);
 	}
 	return mRenderTargetView;
 }
@@ -70,13 +64,7 @@ ID3D11ShaderResourceView* Surface::GetShaderResourceView(ID3D11Device* device)
 {
 	if (mShaderResourceView == NULL)
 	{
-		HRESULT res = device->CreateShaderResourceView(mTexture, NULL, &mShaderResourceView);
-		if (FAILED(res))
-		{
-#ifdef _DEBUG
-			std::cout << "Blib: Shader resource view creation failed!" << std::endl;
-#endif // _DEBUG
-		}
+		device->CreateShaderResourceView(mTexture, NULL, &mShaderResourceView);
 	}
 	return mShaderResourceView;
 }
