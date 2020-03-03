@@ -1,6 +1,6 @@
 #include "../common.hpp"
+#include "DepthStencil.hpp"
 #include "Surface.hpp"
-#include <d3d11.h>
 #include <iostream>
 #include <stack>
 
@@ -26,47 +26,18 @@ GM_EXPORT gmreal_t b_d3d11_init(gmptr_t device, gmptr_t context)
 	return GM_TRUE;
 }
 
-GM_EXPORT gmreal_t b_surface_create(gmreal_t width, gmreal_t height, gmreal_t format)
+////////////////////////////////////////////////////////////////////////////////
+//
+// Render target
+//
+
+GM_EXPORT gmreal_t b_reset_render_targets()
 {
-	Surface* surface = BCreateObject<Surface>();
-	if (!surface->Initialize(gDevice, width, height, format))
-	{
-		BDestroy(surface);
-		return ID_NONE;
-	}
-	return surface->GetId();
-}
-
-GM_EXPORT gmreal_t b_surface_get_width(gmreal_t id)
-{
-	return BGetObject<Surface>(id)->GetWidth();
-}
-
-GM_EXPORT gmreal_t b_surface_get_height(gmreal_t id)
-{
-	return BGetObject<Surface>(id)->GetHeight();
-}
-
-GM_EXPORT gmreal_t b_surface_clear(gmreal_t id, gmreal_t color, gmreal_t alpha)
-{
-	Surface* surface = BGetObject<Surface>(id);
-	ID3D11RenderTargetView* rtv = surface->GetRenderTargetView(gDevice);
-
-	UINT32 colorInt = static_cast<UINT32>(color);
-	FLOAT r = static_cast<FLOAT>(colorInt & 0xFF) / 255.0f;
-	FLOAT g = static_cast<FLOAT>((colorInt >> 8) & 0xFF) / 255.0f;
-	FLOAT b = static_cast<FLOAT>((colorInt >> 16) & 0xFF) / 255.0f;
-
-	FLOAT rgba[] = { r, g, b, static_cast<FLOAT>(alpha) };
-	gContext->ClearRenderTargetView(rtv, rgba);
-	return GM_TRUE;
-}
-
-GM_EXPORT gmreal_t b_surface_set_texture(gmreal_t id, gmreal_t slot)
-{
-	Surface* surface = BGetObject<Surface>(id);
-	ID3D11ShaderResourceView* srv = surface->GetShaderResourceView(gDevice);
-	gContext->PSSetShaderResources(static_cast<UINT>(slot), 1, &srv);
+	ID3D11RenderTargetView* rtv = gRenderTargetStack.top();
+	gRenderTargetStack.pop();
+	ID3D11DepthStencilView* dsv = gDepthStencilStack.top();
+	gDepthStencilStack.pop();
+	gContext->OMSetRenderTargets(1, &rtv, dsv);
 	return GM_TRUE;
 }
 
@@ -107,12 +78,56 @@ GM_EXPORT gmreal_t b_set_render_targets(gmreal_t count, gmptr_t targets, gmreal_
 	return GM_TRUE;
 }
 
-GM_EXPORT gmreal_t b_reset_render_targets()
+////////////////////////////////////////////////////////////////////////////////
+//
+// Surface
+//
+
+GM_EXPORT gmreal_t b_surface_clear(gmreal_t id, gmreal_t color, gmreal_t alpha)
 {
-	ID3D11RenderTargetView* rtv = gRenderTargetStack.top();
-	gRenderTargetStack.pop();
-	ID3D11DepthStencilView* dsv = gDepthStencilStack.top();
-	gDepthStencilStack.pop();
-	gContext->OMSetRenderTargets(1, &rtv, dsv);
+	Surface* surface = BGetObject<Surface>(id);
+	ID3D11RenderTargetView* rtv = surface->GetRenderTargetView(gDevice);
+
+	UINT32 colorInt = static_cast<UINT32>(color);
+	FLOAT r = static_cast<FLOAT>(colorInt & 0xFF) / 255.0f;
+	FLOAT g = static_cast<FLOAT>((colorInt >> 8) & 0xFF) / 255.0f;
+	FLOAT b = static_cast<FLOAT>((colorInt >> 16) & 0xFF) / 255.0f;
+
+	FLOAT rgba[] = { r, g, b, static_cast<FLOAT>(alpha) };
+	gContext->ClearRenderTargetView(rtv, rgba);
 	return GM_TRUE;
+}
+
+GM_EXPORT gmreal_t b_surface_create(gmreal_t width, gmreal_t height, gmreal_t format)
+{
+	Surface* surface = BCreateObject<Surface>();
+	if (!surface->Initialize(gDevice, width, height, format))
+	{
+		BDestroy(surface);
+		return ID_NONE;
+	}
+	return surface->GetId();
+}
+
+GM_EXPORT gmreal_t b_surface_set_texture(gmreal_t id, gmreal_t slot)
+{
+	Surface* surface = BGetObject<Surface>(id);
+	ID3D11ShaderResourceView* srv = surface->GetShaderResourceView(gDevice);
+	gContext->PSSetShaderResources(static_cast<UINT>(slot), 1, &srv);
+	return GM_TRUE;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// Texture
+//
+
+GM_EXPORT gmreal_t b_texture_get_width(gmreal_t id)
+{
+	return BGetObject<ITexture>(id)->GetWidth();
+}
+
+GM_EXPORT gmreal_t b_texture_get_height(gmreal_t id)
+{
+	return BGetObject<ITexture>(id)->GetHeight();
 }

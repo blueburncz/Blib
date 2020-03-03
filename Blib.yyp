@@ -74,7 +74,7 @@
             "Key": "125a5858-5b40-4551-97da-c8f5e6fb264f",
             "Value": {
                 "id": "fe7e150e-8d09-4045-ad7c-462021efa678",
-                "resourcePath": "scripts\\b_surface_get_height\\b_surface_get_height.yy",
+                "resourcePath": "scripts\\b_texture_get_height\\b_texture_get_height.yy",
                 "resourceType": "GMScript"
             }
         },
@@ -146,7 +146,7 @@
             "Key": "2fb8bc85-5007-4e16-8017-12ccc9fe8c95",
             "Value": {
                 "id": "65d07c63-469c-44fe-9b7c-d38a3888a8c9",
-                "resourcePath": "scripts\\b_surface_get_width\\b_surface_get_width.yy",
+                "resourcePath": "scripts\\b_texture_get_width\\b_texture_get_width.yy",
                 "resourceType": "GMScript"
             }
         },
@@ -528,9 +528,9 @@
         "5b0da288-833e-43b5-83b4-9c7476280d3d",
         "b824a4f2-ee11-43a8-80a5-99f38aa6c81d",
         "d3881bc5-0007-4279-9708-9d7d72cfada4",
+        "0020c3d8-78ea-4f82-b2ee-6026724e5558",
         "125a5858-5b40-4551-97da-c8f5e6fb264f",
         "2fb8bc85-5007-4e16-8017-12ccc9fe8c95",
-        "0020c3d8-78ea-4f82-b2ee-6026724e5558",
         "3f99bade-87a6-4e29-bf69-5659ef767d39",
         "3d7f1ac3-e6b9-4bed-bf93-cf07079431b4",
         "28652b76-e6a8-4d3d-9a01-4efbc6523c0d",

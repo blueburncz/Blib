@@ -46,7 +46,7 @@ ID3D11DepthStencilView* DepthStencil::GetDepthStencilView(ID3D11Device* device)
 {
 	if (mDepthStencilView == NULL)
 	{
-
+		device->CreateDepthStencilView(mTexture, NULL, &mDepthStencilView);
 	}
 	return mDepthStencilView;
 }

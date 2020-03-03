@@ -1,8 +1,8 @@
 {
-    "id": "125a5858-5b40-4551-97da-c8f5e6fb264f",
+    "id": "2fb8bc85-5007-4e16-8017-12ccc9fe8c95",
     "modelName": "GMScript",
     "mvc": "1.0",
-    "name": "b_surface_get_height",
+    "name": "b_texture_get_width",
     "IsCompatibility": false,
     "IsDnD": false
 }
