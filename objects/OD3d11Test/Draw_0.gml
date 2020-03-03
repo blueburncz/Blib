@@ -2,9 +2,10 @@ var _matWorld = matrix_get(matrix_world);
 var _matView = matrix_get(matrix_view);
 var _matProj = matrix_get(matrix_projection);
 
-gpu_set_cullmode(cull_noculling);
-gpu_set_ztestenable(false);
-gpu_set_zwriteenable(false);
+gpu_push_state();
+gpu_set_cullmode(cull_counterclockwise);
+gpu_set_ztestenable(true);
+gpu_set_zwriteenable(true);
 
 b_surface_clear(surface, c_red, 1);
 b_depthstencil_clear(depthStencil, 1, 0);
@@ -20,6 +21,8 @@ vertex_submit(vBuffer, pr_trianglelist, -1);
 shader_reset();
 
 b_reset_render_targets();
+
+gpu_pop_state();
 
 matrix_set(matrix_world, _matWorld);
 matrix_set(matrix_view, _matView);
