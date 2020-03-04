@@ -3,5 +3,8 @@
     "description": "",
     "license": "MIT",
     "homepage": "https://github.com/blueburn-cz/Blib",
-    "yyp": "Blib.yyp"
+    "yyp": "Blib.yyp",
+    "ignore": {
+        "Test": "group"
+    }
 }
