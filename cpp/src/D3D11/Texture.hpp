@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../common.hpp"
-#include "../Manager.hpp"
 #include "../Object.hpp"
 #include <d3d11.h>
 

@@ -1,4 +1,5 @@
 #include "../common.hpp"
+#include "../Manager.hpp"
 #include "DepthStencil.hpp"
 #include "Surface.hpp"
 #include <stack>
