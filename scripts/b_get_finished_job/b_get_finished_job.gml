@@ -1,4 +1,8 @@
 /// @func b_get_finished_job()
 /// @return {real}
-gml_pragma("forceinline");
-return external_call(global.__bGetFinishedJob);
+function b_get_finished_job() {
+	gml_pragma("forceinline");
+	return external_call(global.__bGetFinishedJob);
+
+
+}

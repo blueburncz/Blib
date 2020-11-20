@@ -1,8 +1,12 @@
 {
-    "id": "2fb8bc85-5007-4e16-8017-12ccc9fe8c95",
-    "modelName": "GMScript",
-    "mvc": "1.0",
-    "name": "b_texture_get_width",
-    "IsCompatibility": false,
-    "IsDnD": false
+  "isDnD": false,
+  "isCompatibility": false,
+  "parent": {
+    "name": "Texture",
+    "path": "folders/Scripts/Blib/D3D11/Texture.yy",
+  },
+  "resourceVersion": "1.0",
+  "name": "b_texture_get_width",
+  "tags": [],
+  "resourceType": "GMScript",
 }

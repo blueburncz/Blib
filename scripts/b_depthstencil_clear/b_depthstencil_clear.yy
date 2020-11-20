@@ -1,8 +1,12 @@
 {
-    "id": "c634e7d0-8e80-4e84-800e-e6d7a04ee178",
-    "modelName": "GMScript",
-    "mvc": "1.0",
-    "name": "b_depthstencil_clear",
-    "IsCompatibility": false,
-    "IsDnD": false
+  "isDnD": false,
+  "isCompatibility": false,
+  "parent": {
+    "name": "DepthStencil",
+    "path": "folders/Scripts/Blib/D3D11/Texture/DepthStencil.yy",
+  },
+  "resourceVersion": "1.0",
+  "name": "b_depthstencil_clear",
+  "tags": [],
+  "resourceType": "GMScript",
 }

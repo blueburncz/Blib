@@ -15,84 +15,84 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\common.hpp">
+    <ClInclude Include="include\Blib\AStar\Graph.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Threading\Semaphore.hpp">
+    <ClInclude Include="include\Blib\AStar\Node.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Threading\Worker.hpp">
+    <ClInclude Include="include\Blib\D3D11\Texture.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Object.hpp">
+    <ClInclude Include="include\Blib\D3D11\DepthStencil.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Manager.hpp">
+    <ClInclude Include="include\Blib\D3D11\Surface.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\AStar\Graph.hpp">
+    <ClInclude Include="include\Blib\Threading\Semaphore.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\AStar\Node.hpp">
+    <ClInclude Include="include\Blib\Threading\Scheduler.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Threading\Job.hpp">
+    <ClInclude Include="include\Blib\Threading\Job.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Threading\Scheduler.hpp">
+    <ClInclude Include="include\Blib\Threading\Worker.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\D3D11\Surface.hpp">
+    <ClInclude Include="include\Blib\common.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\D3D11\DepthStencil.hpp">
+    <ClInclude Include="include\Blib\Manager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\D3D11\Texture.hpp">
+    <ClInclude Include="include\Blib\Object.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Threading\Semaphore.cpp">
+    <ClCompile Include="src\Blib\AStar\exports.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Threading\Worker.cpp">
+    <ClCompile Include="src\Blib\AStar\Graph.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Threading\exports.cpp">
+    <ClCompile Include="src\Blib\AStar\Node.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\AStar\Graph.cpp">
+    <ClCompile Include="src\Blib\Threading\exports.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\AStar\Node.cpp">
+    <ClCompile Include="src\Blib\Threading\Job.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Threading\Scheduler.cpp">
+    <ClCompile Include="src\Blib\Threading\Scheduler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Object.cpp">
+    <ClCompile Include="src\Blib\Threading\Semaphore.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\exports.cpp">
+    <ClCompile Include="src\Blib\Threading\Worker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Threading\Job.cpp">
+    <ClCompile Include="src\Blib\Manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Manager.cpp">
+    <ClCompile Include="src\Blib\D3D11\DepthStencil.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\AStar\exports.cpp">
+    <ClCompile Include="src\Blib\D3D11\exports.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\D3D11\exports.cpp">
+    <ClCompile Include="src\Blib\D3D11\Surface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\D3D11\Surface.cpp">
+    <ClCompile Include="src\Blib\Object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\D3D11\DepthStencil.cpp">
+    <ClCompile Include="src\Blib\exports.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

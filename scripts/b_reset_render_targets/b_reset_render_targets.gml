@@ -1,3 +1,7 @@
 /// @func b_surface_reset_target()
-gml_pragma("forceinline");
-external_call(global.__bResetRenderTargets);
+function b_reset_render_targets() {
+	gml_pragma("forceinline");
+	external_call(global.__bResetRenderTargets);
+
+
+}

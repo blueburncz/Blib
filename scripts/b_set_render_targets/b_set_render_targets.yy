@@ -1,8 +1,12 @@
 {
-    "id": "5b0da288-833e-43b5-83b4-9c7476280d3d",
-    "modelName": "GMScript",
-    "mvc": "1.0",
-    "name": "b_set_render_targets",
-    "IsCompatibility": false,
-    "IsDnD": false
+  "isDnD": false,
+  "isCompatibility": false,
+  "parent": {
+    "name": "D3D11",
+    "path": "folders/Blib/Scripts/D3D11.yy",
+  },
+  "resourceVersion": "1.0",
+  "name": "b_set_render_targets",
+  "tags": [],
+  "resourceType": "GMScript",
 }
