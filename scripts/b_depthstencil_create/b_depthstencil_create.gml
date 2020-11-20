@@ -1,11 +1,10 @@
-/// @func b_depthstencil_create(width, height, format)
-/// @param {real} width
-/// @param {real} height
-/// @param {real} format
+/// @func b_depthstencil_create(_width, _height, _format)
+/// @param {real} _width
+/// @param {real} _height
+/// @param {B_ETextureFormat} _format
 /// @return {real}
-function b_depthstencil_create(argument0, argument1, argument2) {
+function b_depthstencil_create(_width, _height, _format)
+{
 	gml_pragma("forceinline");
-	return external_call(global.__bDepthStencilCreate, argument0, argument1, argument2);
-
-
+	return external_call(global.__b_depth_stencil_create, _width, _height, _format);
 }

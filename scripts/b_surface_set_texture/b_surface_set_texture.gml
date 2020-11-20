@@ -1,9 +1,8 @@
 /// @func b_surface_set_texture(surface, slot)
-/// @param {real} surface
-/// @param {real} slot
-function b_surface_set_texture(argument0, argument1) {
+/// @param {real} _surface
+/// @param {real} _slot
+function b_surface_set_texture(_surface, _slot)
+{
 	gml_pragma("forceinline");
-	external_call(global.__bSurfaceSetTexture, argument0, argument1);
-
-
+	external_call(global.__b_surface_set_texture, _surface, _slot);
 }

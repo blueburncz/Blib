@@ -1,10 +1,9 @@
-/// @func b_surface_clear(surface, color, alpha)
-/// @param {real} surface
-/// @param {real} color
-/// @param {real} alpha
-function b_surface_clear(argument0, argument1, argument2) {
+/// @func b_surface_clear(_surface, _color, _alpha)
+/// @param {real} _surface
+/// @param {real} _color
+/// @param {real} _alpha
+function b_surface_clear(_surface, _color, _alpha)
+{
 	gml_pragma("forceinline");
-	external_call(global.__bSurfaceClear, argument0, argument1, argument2);
-
-
+	external_call(global.__b_surface_clear, _surface, _color, _alpha);
 }

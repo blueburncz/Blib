@@ -1,7 +1,7 @@
 {
   "resources": [
     {"id":{"name":"B_Spr1x1","path":"sprites/B_Spr1x1/B_Spr1x1.yy",},"order":0,},
-    {"id":{"name":"b_astar_init_global","path":"scripts/b_astar_init_global/b_astar_init_global.yy",},"order":0,},
+    {"id":{"name":"b_astar","path":"scripts/b_astar/b_astar.yy",},"order":0,},
     {"id":{"name":"b_depthstencil_clear","path":"scripts/b_depthstencil_clear/b_depthstencil_clear.yy",},"order":0,},
     {"id":{"name":"b_depthstencil_create","path":"scripts/b_depthstencil_create/b_depthstencil_create.yy",},"order":1,},
     {"id":{"name":"b_draw_surface","path":"scripts/b_draw_surface/b_draw_surface.yy",},"order":0,},
@@ -18,9 +18,8 @@
     {"id":{"name":"b_job_is_finished","path":"scripts/b_job_is_finished/b_job_is_finished.yy",},"order":1,},
     {"id":{"name":"b_get_finished_job","path":"scripts/b_get_finished_job/b_get_finished_job.yy",},"order":2,},
     {"id":{"name":"b_sleep_job_create","path":"scripts/b_sleep_job_create/b_sleep_job_create.yy",},"order":3,},
-    {"id":{"name":"b_threading_init_global","path":"scripts/b_threading_init_global/b_threading_init_global.yy",},"order":4,},
-    {"id":{"name":"b_config","path":"scripts/b_config/b_config.yy",},"order":3,},
-    {"id":{"name":"b_init_global","path":"scripts/b_init_global/b_init_global.yy",},"order":4,},
+    {"id":{"name":"b_threading","path":"scripts/b_threading/b_threading.yy",},"order":4,},
+    {"id":{"name":"b_init","path":"scripts/b_init/b_init.yy",},"order":4,},
     {"id":{"name":"b_object_destroy","path":"scripts/b_object_destroy/b_object_destroy.yy",},"order":5,},
     {"id":{"name":"b_object_exists","path":"scripts/b_object_exists/b_object_exists.yy",},"order":6,},
     {"id":{"name":"b_object_get_type","path":"scripts/b_object_get_type/b_object_get_type.yy",},"order":7,},
@@ -73,6 +72,7 @@
   ],
   "IncludedFiles": [
     {"CopyToMask":64,"filePath":"datafiles/Blib","resourceVersion":"1.0","name":"Blib.dll","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles/Blib","resourceVersion":"1.0","name":"Blib.dll","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/Blib","resourceVersion":"1.0","name":"Blib.dll","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/Blib","resourceVersion":"1.0","name":"Blib.dll","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/Blib","resourceVersion":"1.0","name":"Blib.dll","resourceType":"GMIncludedFile",},

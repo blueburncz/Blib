@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Scripts",
-    "path": "folders/Blib/Scripts.yy",
+    "name": "AStar",
+    "path": "folders/Blib/Scripts/AStar.yy",
   },
   "resourceVersion": "1.0",
-  "name": "b_init_global",
+  "name": "b_astar",
   "tags": [],
   "resourceType": "GMScript",
 }

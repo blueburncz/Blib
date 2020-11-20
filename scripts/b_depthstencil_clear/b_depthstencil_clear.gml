@@ -1,10 +1,9 @@
-/// @func b_depthstencil_clear(depthStencil, depth, stencil)
-/// @param {real} depthStencil
-/// @param {real} depth
-/// @param {real} stencil
-function b_depthstencil_clear(argument0, argument1, argument2) {
+/// @func b_depthstencil_clear(_depth_stencil, depth, stencil)
+/// @param {real} _depth_stencil
+/// @param {real} _depth
+/// @param {real} _stencil
+function b_depthstencil_clear(_depth_stencil, _depth, _stencil)
+{
 	gml_pragma("forceinline");
-	external_call(global.__bDepthStencilClear, argument0, argument1, argument2);
-
-
+	external_call(global.__b_depth_stencil_clear, _depth_stencil, _depth, _stencil);
 }

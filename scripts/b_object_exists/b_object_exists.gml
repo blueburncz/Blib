@@ -1,9 +1,8 @@
-/// @desc b_object_exists(id)
-/// @param {real} id
+/// @desc b_object_exists(_id)
+/// @param {real} _id
 /// @return {bool}
-function b_object_exists(argument0) {
+function b_object_exists(_id)
+{
 	gml_pragma("forceinline");
-	return external_call(global.__bObjectExists, argument0);
-
-
+	return external_call(global.__b_object_exists, _id);
 }

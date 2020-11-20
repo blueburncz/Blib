@@ -1,9 +1,8 @@
-/// @desc b_object_destroy(id)
-/// @param {real} id
+/// @desc b_object_destroy(_id)
+/// @param {real} _id
 /// @return {real}
-function b_object_destroy(argument0) {
+function b_object_destroy(_id)
+{
 	gml_pragma("forceinline");
-	return external_call(global.__bObjectDestroy, argument0);
-
-
+	return external_call(global.__b_object_destroy, _id);
 }

@@ -6,7 +6,7 @@
     "path": "folders/Blib/Scripts.yy",
   },
   "resourceVersion": "1.0",
-  "name": "b_config",
+  "name": "b_init",
   "tags": [],
   "resourceType": "GMScript",
 }

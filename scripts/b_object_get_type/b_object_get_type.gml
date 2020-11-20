@@ -1,9 +1,8 @@
-/// @desc b_object_get_type(id)
-/// @param {real} id
+/// @desc b_object_get_type(_id)
+/// @param {real} _id
 /// @return {string}
-function b_object_get_type(argument0) {
+function b_object_get_type(_id)
+{
 	gml_pragma("forceinline");
-	return external_call(global.__bObjectGetType, argument0);
-
-
+	return external_call(global.__b_object_get_type, _id);
 }

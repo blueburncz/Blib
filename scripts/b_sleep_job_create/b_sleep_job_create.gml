@@ -1,9 +1,8 @@
-/// @func b_sleep_job_create(duration)
-/// @param {real} duration
+/// @func b_sleep_job_create(_duration)
+/// @param {real} _duration
 /// @return {real}
-function b_sleep_job_create(argument0) {
+function b_sleep_job_create(_duration)
+{
 	gml_pragma("forceinline");
-	return external_call(global.__bSleepJobCreate, argument0);
-
-
+	return external_call(global.__b_sleep_job_create, _duration);
 }
