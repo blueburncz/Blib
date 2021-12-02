@@ -3,7 +3,7 @@
 function BLIB_CTexture()
 	: BLIB_CObject() constructor
 {
-	/// @func BLIB_CTexture(_dest)
+	/// @func Copy(_dest)
 	/// @param {BLIB_CTexture} _dest
 	/// @return {BLIB_CTexture} Returns `self`.
 	static Copy = function (_dest) {
