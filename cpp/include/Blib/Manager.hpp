@@ -8,13 +8,13 @@
 
 #define ID_REUSE_THRESHOLD 100000
 
-class Manager
+class CManager
 {
 public:
-	~Manager();
+	~CManager();
 
 	/** Retrieves the singleton. */
-	static Manager& Instance();
+	static CManager& Instance();
 
 	/**
 	 * Creates a new object.
@@ -23,25 +23,25 @@ public:
 	T* Create()
 	{
 		T* object = new T();
-		object->mType = T::mObjectType;
+		object->Type = T::ObjectType;
 
 		{
-			std::unique_lock<std::mutex> lock(mMutex);
+			std::unique_lock<std::mutex> lock(Mutex);
 			gmreal_t id;
 
-			if (mIdAvailable.size() > ID_REUSE_THRESHOLD)
+			if (IdAvailable.size() > ID_REUSE_THRESHOLD)
 			{
-				id = mIdAvailable.front();
-				mIdAvailable.pop();
-				mObjects[static_cast<size_t>(id)] = object;
+				id = IdAvailable.front();
+				IdAvailable.pop();
+				Objects[static_cast<size_t>(id)] = object;
 			}
 			else
 			{
-				id = mIdNext++;
-				mObjects.push_back(object);
+				id = IdNext++;
+				Objects.push_back(object);
 			}
 
-			object->mId = id;
+			object->Id = id;
 		}
 		
 		return object;
@@ -62,8 +62,8 @@ public:
 	template<class T>
 	T* Get(gmreal_t id)
 	{
-		std::unique_lock<std::mutex> lock(mMutex);
-		return static_cast<T*>(mObjects.at(static_cast<size_t>(id)));
+		std::unique_lock<std::mutex> lock(Mutex);
+		return static_cast<T*>(Objects.at(static_cast<size_t>(id)));
 	}
 
 	/**
@@ -74,19 +74,19 @@ public:
 	void Destroy(gmreal_t id);
 
 private:
-	Manager() {}
+	CManager() {}
 
 	/** Used for locking structures when adding, getting, removing etc. objects. */
-	std::mutex mMutex;
+	std::mutex Mutex;
 
 	/** The id of the next added object. */
-	gmreal_t mIdNext = 0.0;
+	gmreal_t IdNext = 0.0;
 
 	/** Ids available for reuse. */
-	std::queue<gmreal_t> mIdAvailable;
+	std::queue<gmreal_t> IdAvailable;
 
 	/** List of all added objects. */
-	std::vector<Object*> mObjects;
+	std::vector<CObject*> Objects;
 };
 
 /**
@@ -97,13 +97,13 @@ private:
 template<class T>
 inline T* BCreateObject()
 {
-	return Manager::Instance().Create<T>();
+	return CManager::Instance().Create<T>();
 }
 
 /** Returns true if object with given id exists. */
 inline bool BExists(gmreal_t id)
 {
-	return Manager::Instance().Exists(id);
+	return CManager::Instance().Exists(id);
 }
 
 /**
@@ -116,17 +116,17 @@ inline bool BExists(gmreal_t id)
 template<class T>
 inline T* BGetObject(gmreal_t id)
 {
-	return Manager::Instance().Get<T>(id);
+	return CManager::Instance().Get<T>(id);
 }
 
 /** Destroys the object. */
 inline void BDestroy(gmreal_t id)
 {
-	Manager::Instance().Destroy(id);
+	CManager::Instance().Destroy(id);
 }
 
 /** Destroys the object. */
-inline void BDestroy(Object* object)
+inline void BDestroy(CObject* object)
 {
-	Manager::Instance().Destroy(object->GetId());
+	CManager::Instance().Destroy(object->GetId());
 }

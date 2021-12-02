@@ -1,35 +1,35 @@
 #include <Blib/Manager.hpp>
 
-Manager::~Manager()
+CManager::~CManager()
 {
-	for (Object* o : mObjects)
+	for (CObject* o : Objects)
 	{
 		delete o;
 	}
-	mObjects.clear();
+	Objects.clear();
 }
 
-Manager& Manager::Instance()
+CManager& CManager::Instance()
 {
-	static Manager manager;
+	static CManager manager;
 	return manager;
 }
 
-bool Manager::Exists(gmreal_t id) const
+bool CManager::Exists(gmreal_t id) const
 {
 	size_t pos = static_cast<size_t>(id);
-	if (id < 0.0 || pos >= mObjects.size())
+	if (id < 0.0 || pos >= Objects.size())
 	{
 		return false;
 	}
-	return mObjects.at(pos) != nullptr;
+	return Objects.at(pos) != nullptr;
 }
 
-void Manager::Destroy(gmreal_t id)
+void CManager::Destroy(gmreal_t id)
 {
-	std::unique_lock<std::mutex> lock(mMutex);
+	std::unique_lock<std::mutex> lock(Mutex);
 	size_t pos = static_cast<size_t>(id);
-	delete mObjects.at(pos);
-	mObjects[pos] = nullptr;
-	mIdAvailable.push(id);
+	delete Objects.at(pos);
+	Objects[pos] = nullptr;
+	IdAvailable.push(id);
 }

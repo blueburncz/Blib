@@ -18,14 +18,14 @@ vertex_freeze(vbuffer);
 
 surface_width = 256;
 surface_height = 256;
-surface = b_surface_create(surface_width, surface_height, B_ETextureFormat.R16G16B16A16_FLOAT);
-if (surface == B_ID_NONE)
+surface = new BLIB_CSurface(surface_width, surface_height, BLIB_ETextureFormat.R16G16B16A16_FLOAT);
+if (!surface.Exists())
 {
-	show_error("Surface create failed!", true);
+	show_error("Failed to create Surface!", true);
 }
 
-depth_stencil = b_depthstencil_create(surface_width, surface_height, B_ETextureFormat.D24_UNORM_S8_UINT);
-if (depth_stencil == B_ID_NONE)
+depth_stencil = new BLIB_CDepthStencil(surface_width, surface_height, BLIB_ETextureFormat.D24_UNORM_S8_UINT);
+if (!depth_stencil.Exists())
 {
-	show_error("DepthStencil create failed!", true);
+	show_error("Failed to create DepthStencil!", true);
 }

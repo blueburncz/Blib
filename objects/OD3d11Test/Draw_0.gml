@@ -7,10 +7,10 @@ gpu_set_cullmode(cull_counterclockwise);
 gpu_set_ztestenable(true);
 gpu_set_zwriteenable(true);
 
-b_surface_clear(surface, c_red, 1);
-b_depthstencil_clear(depth_stencil, 1, 0);
+surface.Clear(c_red, 1);
+depth_stencil.Clear(1, 0);
 
-b_set_render_targets(1, surface, depth_stencil);
+blib_set_render_targets(surface, depth_stencil);
 
 matrix_set(matrix_world, matrix_build(0, 0, 0, 0, 0, 0, 2, 2, 1));
 matrix_set(matrix_view, matrix_build_lookat(10, 10, 10, 0, 0, 0, 0, 0, 1));
@@ -20,7 +20,7 @@ shader_set(ShTest);
 vertex_submit(vbuffer, pr_trianglelist, -1);
 shader_reset();
 
-b_reset_render_targets();
+blib_reset_render_targets();
 
 gpu_pop_state();
 

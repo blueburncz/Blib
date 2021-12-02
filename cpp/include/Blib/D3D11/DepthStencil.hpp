@@ -12,14 +12,14 @@ namespace D3D11
 		ID3D11DepthStencilView* GetDepthStencilView(ID3D11Device* device);
 
 	private:
-		friend class Manager;
+		friend class CManager;
 
 		DepthStencil();
 
 		~DepthStencil();
 
-		static gmstring_t mObjectType;
+		static gmstring_t ObjectType;
 
-		ID3D11DepthStencilView* mDepthStencilView = NULL;
+		ID3D11DepthStencilView* DepthStencilView = NULL;
 	};
 }

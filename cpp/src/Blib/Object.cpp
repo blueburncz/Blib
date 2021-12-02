@@ -1,11 +1,11 @@
 #include <Blib/Object.hpp>
 
-gmstring_t Object::mObjectType = "Object";
+gmstring_t CObject::ObjectType = "Object";
 
-Object::Object()
+CObject::CObject()
 {
 }
 
-Object::~Object()
+CObject::~CObject()
 {
 }

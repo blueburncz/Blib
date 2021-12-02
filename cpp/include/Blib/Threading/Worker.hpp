@@ -5,22 +5,20 @@
 
 namespace Jobs
 {
-	class Scheduler;
-
-	class Worker final
+	class CWorker final
 	{
 	public:
-		Worker(Scheduler* scheduler);
+		CWorker(class CScheduler* scheduler);
 
-		~Worker();
+		~CWorker();
 
 	private:
 		void Work();
 
-		Scheduler* mScheduler;
+		class CScheduler* Scheduler;
 
-		std::thread mThread;
+		std::thread Thread;
 
-		bool mRunning = true;
+		bool Running = true;
 	};
 }

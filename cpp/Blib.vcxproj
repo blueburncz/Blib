@@ -19,9 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Blib\AStar\exports.cpp" />
-    <ClCompile Include="src\Blib\AStar\Graph.cpp" />
-    <ClCompile Include="src\Blib\AStar\Node.cpp" />
     <ClCompile Include="src\Blib\D3D11\DepthStencil.cpp" />
     <ClCompile Include="src\Blib\D3D11\exports.cpp" />
     <ClCompile Include="src\Blib\D3D11\Surface.cpp" />
@@ -35,8 +32,6 @@
     <ClCompile Include="src\Blib\Threading\Semaphore.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Blib\AStar\Graph.hpp" />
-    <ClInclude Include="include\Blib\AStar\Node.hpp" />
     <ClInclude Include="include\Blib\common.hpp" />
     <ClInclude Include="include\Blib\D3D11\DepthStencil.hpp" />
     <ClInclude Include="include\Blib\D3D11\Surface.hpp" />

@@ -14,16 +14,16 @@ namespace D3D11
 		ID3D11ShaderResourceView* GetShaderResourceView(ID3D11Device* device);
 
 	private:
-		friend class Manager;
+		friend class CManager;
 
 		Surface();
 
 		~Surface();
 
-		static gmstring_t mObjectType;
+		static gmstring_t ObjectType;
 
-		ID3D11RenderTargetView* mRenderTargetView = NULL;
+		ID3D11RenderTargetView* RenderTargetView = NULL;
 
-		ID3D11ShaderResourceView* mShaderResourceView = NULL;
+		ID3D11ShaderResourceView* ShaderResourceView = NULL;
 	};
 }

@@ -1,8 +1,10 @@
 #include <Blib/Threading/Scheduler.hpp>
+#include <Blib/Threading/Job.hpp>
+#include <Blib/Threading/Worker.hpp>
 
 using namespace Jobs;
 
-Scheduler::Scheduler()
+CScheduler::CScheduler()
 {
 	unsigned workers = std::thread::hardware_concurrency();
 	
@@ -13,85 +15,85 @@ Scheduler::Scheduler()
 
 	for (unsigned i = 0; i < workers; ++i)
 	{
-		mWorkers.push_back(new Worker(this));
+		Workers.push_back(new CWorker(this));
 	}
 }
 
-Scheduler::~Scheduler()
+CScheduler::~CScheduler()
 {
-	for (auto worker : mWorkers)
+	for (auto worker : Workers)
 	{
 		delete worker;
 	}
-	mWorkers.clear();
+	Workers.clear();
 
-	for (Job* j : mJobsWaiting)
+	for (CJob* j : JobsWaiting)
 	{
 		delete j;
 	}
-	mJobsWaiting.clear();
+	JobsWaiting.clear();
 
-	while (!mJobsFinished.empty())
+	while (!JobsFinished.empty())
 	{
-		Job* job = mJobsFinished.front();
-		mJobsFinished.pop();
+		CJob* job = JobsFinished.front();
+		JobsFinished.pop();
 		delete job;
 	}
 }
 
-Scheduler& Scheduler::Instance()
+CScheduler& CScheduler::Instance()
 {
-	static Scheduler scheduler;
+	static CScheduler scheduler;
 	return scheduler;
 }
 
-void Scheduler::StartJob(Job* job)
+void CScheduler::StartJob(CJob* job)
 {
 	{
-		std::unique_lock<std::mutex> lock(mMutex);
-		mJobsWaiting.push_back(job);
+		std::unique_lock<std::mutex> lock(Mutex);
+		JobsWaiting.push_back(job);
 	}
-	mSemaphore.Release();
+	Semaphore.Release();
 }
 
-Job* Scheduler::GetJob()
+CJob* CScheduler::GetJob()
 {
-	mSemaphore.Acquire();
-	std::unique_lock<std::mutex> lock(mMutex);
-	Job* job = mJobsWaiting.front();
-	mJobsWaiting.erase(mJobsWaiting.begin());
+	Semaphore.Acquire();
+	std::unique_lock<std::mutex> lock(Mutex);
+	CJob* job = JobsWaiting.front();
+	JobsWaiting.erase(JobsWaiting.begin());
 	return job;
 }
 
-bool Scheduler::RemoveJob(Job* job)
+bool CScheduler::RemoveJob(CJob* job)
 {
-	std::unique_lock<std::mutex> lock(mMutex);
-	auto end = mJobsWaiting.end();
-	auto it = std::find(mJobsWaiting.begin(), end, job);
+	std::unique_lock<std::mutex> lock(Mutex);
+	auto end = JobsWaiting.end();
+	auto it = std::find(JobsWaiting.begin(), end, job);
 	if (it == end)
 	{
 		return false;
 	}
-	mJobsWaiting.erase(it);
-	mSemaphore.Acquire();
+	JobsWaiting.erase(it);
+	Semaphore.Acquire();
 	return true;
 }
 
-void Scheduler::AddFinishedJob(Job* job)
+void CScheduler::AddFinishedJob(CJob* job)
 {
-	std::unique_lock<std::mutex> lock(mMutex);
-	job->mFinished = true;
-	mJobsFinished.push(job);
+	std::unique_lock<std::mutex> lock(Mutex);
+	job->Finished = true;
+	JobsFinished.push(job);
 }
 
-Job* Scheduler::GetFinishedJob()
+CJob* CScheduler::GetFinishedJob()
 {
-	std::unique_lock<std::mutex> lock(mMutex);
-	Job* job = nullptr;
-	if (!mJobsFinished.empty())
+	std::unique_lock<std::mutex> lock(Mutex);
+	CJob* job = nullptr;
+	if (!JobsFinished.empty())
 	{
-		job = mJobsFinished.front();
-		mJobsFinished.pop();
+		job = JobsFinished.front();
+		JobsFinished.pop();
 	}
 	return job;
 }

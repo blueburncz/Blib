@@ -1,6 +1,10 @@
 for (var i = 1; i <= 3; ++i)
 {
-	var _job = b_sleep_job_create(i * 1000);
-	b_job_start(_job);
+	var _job = new BLIB_CSleepJob(i * 1000);
+	if (!_job.Exists())
+	{
+		show_error("Failed to create SleepJob!", true);
+	}
+	_job.Start();
 	show_debug_message("Created job " + string(_job));
 }

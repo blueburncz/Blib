@@ -3,13 +3,13 @@
 
 using namespace Jobs;
 
-gmstring_t Job::mObjectType = "Job";
+gmstring_t CJob::ObjectType = "Job";
 
-Job::Job()
+CJob::CJob()
 {
 }
 
-Job::~Job()
+CJob::~CJob()
 {
-	Scheduler::Instance().RemoveJob(this);
+	CScheduler::Instance().RemoveJob(this);
 }

@@ -6,19 +6,19 @@
 
 namespace Jobs
 {
-	class Semaphore final
+	class CSemaphore final
 	{
 	public:
-		Semaphore(unsigned count = 0);
+		CSemaphore(unsigned count = 0);
 
-		~Semaphore();
+		~CSemaphore();
 
 		void Acquire();
 
 		void Release();
 
 	private:
-		std::mutex mMutex;
+		std::mutex Mutex;
 
 		std::condition_variable mCondVar;
 

@@ -1,1 +1,1 @@
-b_draw_surface(surface, 0, 0);
+surface.Draw(0, 0);

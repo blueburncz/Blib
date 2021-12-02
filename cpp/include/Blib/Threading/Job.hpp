@@ -5,9 +5,7 @@
 
 namespace Jobs
 {
-	class Scheduler;
-
-	class Job : public Object
+	class CJob : public CObject
 	{
 	public:
 		/** Executes the job. Must be implemented in child classes! */
@@ -16,21 +14,21 @@ namespace Jobs
 		/** Returns true if the jobs is finished. */
 		bool IsFinished() const
 		{
-			return mFinished;
+			return Finished;
 		}
 
 	protected:
-		friend class Manager;
+		friend class CManager;
 
-		friend class Scheduler;
+		friend class CScheduler;
 
-		Job();
+		CJob();
 
-		virtual ~Job();
+		virtual ~CJob();
 
-		static gmstring_t mObjectType;
+		static gmstring_t ObjectType;
 
 		/** True if the job is finished. */
-		bool mFinished = false;
+		bool Finished = false;
 	};
 }

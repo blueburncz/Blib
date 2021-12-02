@@ -3,7 +3,7 @@
 
 using namespace D3D11;
 
-gmstring_t Surface::mObjectType = "Surface";
+gmstring_t Surface::ObjectType = "Surface";
 
 Surface::Surface()
 {
@@ -11,14 +11,14 @@ Surface::Surface()
 
 Surface::~Surface()
 {
-	if (mRenderTargetView != NULL)
+	if (RenderTargetView != NULL)
 	{
-		mRenderTargetView->Release();
+		RenderTargetView->Release();
 	}
 
-	if (mShaderResourceView != NULL)
+	if (ShaderResourceView != NULL)
 	{
-		mShaderResourceView->Release();
+		ShaderResourceView->Release();
 	}
 }
 
@@ -38,33 +38,33 @@ bool Surface::Initialize(ID3D11Device* device, gmreal_t width, gmreal_t height, 
 	desc.CPUAccessFlags = 0;
 	desc.MiscFlags = 0;
 
-	HRESULT res = device->CreateTexture2D(&desc, NULL, &mTexture);
+	HRESULT res = device->CreateTexture2D(&desc, NULL, &Texture);
 
 	if (FAILED(res))
 	{
 		return false;
 	}
 
-	mWidth = width;
-	mHeight = height;
+	Width = width;
+	Height = height;
 
 	return true;
 }
 
 ID3D11RenderTargetView* Surface::GetRenderTargetView(ID3D11Device* device)
 {
-	if (mRenderTargetView == NULL)
+	if (RenderTargetView == NULL)
 	{
-		device->CreateRenderTargetView(mTexture, NULL, &mRenderTargetView);
+		device->CreateRenderTargetView(Texture, NULL, &RenderTargetView);
 	}
-	return mRenderTargetView;
+	return RenderTargetView;
 }
 
 ID3D11ShaderResourceView* Surface::GetShaderResourceView(ID3D11Device* device)
 {
-	if (mShaderResourceView == NULL)
+	if (ShaderResourceView == NULL)
 	{
-		device->CreateShaderResourceView(mTexture, NULL, &mShaderResourceView);
+		device->CreateShaderResourceView(Texture, NULL, &ShaderResourceView);
 	}
-	return mShaderResourceView;
+	return ShaderResourceView;
 }

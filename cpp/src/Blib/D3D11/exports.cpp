@@ -22,7 +22,7 @@ std::stack<ID3D11DepthStencilView*> gDepthStencilStack;
 
 std::stack<D3D11_VIEWPORT> gViewportStack;
 
-GM_EXPORT gmreal_t b_d3d11_init(gmptr_t device, gmptr_t context)
+GM_EXPORT gmreal_t blib_d3d11_init(gmptr_t device, gmptr_t context)
 {
 	gDevice = reinterpret_cast<ID3D11Device*>(device);
 	gContext = reinterpret_cast<ID3D11DeviceContext*>(context);
@@ -35,18 +35,17 @@ GM_EXPORT gmreal_t b_d3d11_init(gmptr_t device, gmptr_t context)
 // DepthStencil
 //
 
-GM_EXPORT gmreal_t b_depthstencil_clear(gmreal_t id, gmreal_t depth, gmreal_t stencil)
+GM_EXPORT gmreal_t blib_depthstencil_clear(gmreal_t id, gmreal_t depth, gmreal_t stencil)
 {
 	DepthStencil* depthStencil = BGetObject<DepthStencil>(id);
 	ID3D11DepthStencilView* dsv = depthStencil->GetDepthStencilView(gDevice);
 
 	gContext->ClearDepthStencilView(dsv, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL,
 		static_cast<FLOAT>(depth), static_cast<UINT8>(stencil));
-
 	return GM_TRUE;
 }
 
-GM_EXPORT gmreal_t b_depthstencil_create(gmreal_t width, gmreal_t height, gmreal_t format)
+GM_EXPORT gmreal_t blib_depthstencil_create(gmreal_t width, gmreal_t height, gmreal_t format)
 {
 	DepthStencil* depthStencil = BCreateObject<DepthStencil>();
 	if (!depthStencil->Initialize(gDevice, width, height, format))
@@ -62,7 +61,7 @@ GM_EXPORT gmreal_t b_depthstencil_create(gmreal_t width, gmreal_t height, gmreal
 // Render target
 //
 
-GM_EXPORT gmreal_t b_reset_render_targets()
+GM_EXPORT gmreal_t blib_reset_render_targets()
 {
 	ID3D11RenderTargetView* rtvs[8];
 
@@ -87,7 +86,7 @@ GM_EXPORT gmreal_t b_reset_render_targets()
 	return GM_TRUE;
 }
 
-GM_EXPORT gmreal_t b_set_render_targets(gmreal_t count, gmptr_t targets, gmreal_t depthStencil)
+GM_EXPORT gmreal_t blib_set_render_targets(gmreal_t count, gmptr_t targets, gmreal_t depthStencil)
 {
 	ID3D11RenderTargetView* rtvs[8];
 	ID3D11DepthStencilView* dsv;
@@ -141,7 +140,7 @@ GM_EXPORT gmreal_t b_set_render_targets(gmreal_t count, gmptr_t targets, gmreal_
 // Surface
 //
 
-GM_EXPORT gmreal_t b_surface_clear(gmreal_t id, gmreal_t color, gmreal_t alpha)
+GM_EXPORT gmreal_t blib_surface_clear(gmreal_t id, gmreal_t color, gmreal_t alpha)
 {
 	Surface* surface = BGetObject<Surface>(id);
 	ID3D11RenderTargetView* rtv = surface->GetRenderTargetView(gDevice);
@@ -156,7 +155,7 @@ GM_EXPORT gmreal_t b_surface_clear(gmreal_t id, gmreal_t color, gmreal_t alpha)
 	return GM_TRUE;
 }
 
-GM_EXPORT gmreal_t b_surface_create(gmreal_t width, gmreal_t height, gmreal_t format)
+GM_EXPORT gmreal_t blib_surface_create(gmreal_t width, gmreal_t height, gmreal_t format)
 {
 	Surface* surface = BCreateObject<Surface>();
 	if (!surface->Initialize(gDevice, width, height, format))
@@ -167,7 +166,7 @@ GM_EXPORT gmreal_t b_surface_create(gmreal_t width, gmreal_t height, gmreal_t fo
 	return surface->GetId();
 }
 
-GM_EXPORT gmreal_t b_surface_set_texture(gmreal_t id, gmreal_t slot)
+GM_EXPORT gmreal_t blib_surface_set_texture(gmreal_t id, gmreal_t slot)
 {
 	Surface* surface = BGetObject<Surface>(id);
 	ID3D11ShaderResourceView* srv = surface->GetShaderResourceView(gDevice);
@@ -180,18 +179,18 @@ GM_EXPORT gmreal_t b_surface_set_texture(gmreal_t id, gmreal_t slot)
 // Texture
 //
 
-GM_EXPORT gmreal_t b_texture_copy(gmreal_t src, gmreal_t dest)
+GM_EXPORT gmreal_t blib_texture_copy(gmreal_t src, gmreal_t dest)
 {
 	BGetObject<ITexture>(src)->Copy(gContext, BGetObject<ITexture>(dest));
 	return GM_TRUE;
 }
 
-GM_EXPORT gmreal_t b_texture_get_width(gmreal_t id)
+GM_EXPORT gmreal_t blib_texture_get_width(gmreal_t id)
 {
 	return BGetObject<ITexture>(id)->GetWidth();
 }
 
-GM_EXPORT gmreal_t b_texture_get_height(gmreal_t id)
+GM_EXPORT gmreal_t blib_texture_get_height(gmreal_t id)
 {
 	return BGetObject<ITexture>(id)->GetHeight();
 }

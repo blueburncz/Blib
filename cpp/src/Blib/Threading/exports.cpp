@@ -6,7 +6,7 @@
 
 using namespace Jobs;
 
-class SleepJob : public Job
+class SleepJob : public CJob
 {
 public:
 	void Execute()
@@ -17,34 +17,34 @@ public:
 	long long mDuration = 0L;
 
 protected:
-	friend class Manager;
+	friend class CManager;
 
-	static gmstring_t mObjectType;
+	static gmstring_t ObjectType;
 };
 
-gmstring_t SleepJob::mObjectType = "SleepJob";
+gmstring_t SleepJob::ObjectType = "SleepJob";
 
-GM_EXPORT gmreal_t b_job_start(gmreal_t id)
+GM_EXPORT gmreal_t blib_job_start(gmreal_t id)
 {
-	Scheduler::Instance().StartJob(BGetObject<Job>(id));
+	CScheduler::Instance().StartJob(BGetObject<CJob>(id));
 	return GM_TRUE;
 }
 
-GM_EXPORT gmreal_t b_job_is_finished(gmreal_t id)
+GM_EXPORT gmreal_t blib_job_is_finished(gmreal_t id)
 {
-	return BGetObject<Job>(id)->IsFinished() ? GM_TRUE : GM_FALSE;
+	return BGetObject<CJob>(id)->IsFinished() ? GM_TRUE : GM_FALSE;
 }
 
-GM_EXPORT gmreal_t b_get_finished_job()
+GM_EXPORT gmreal_t blib_get_finished_job()
 {
-	if (Job* job = Scheduler::Instance().GetFinishedJob())
+	if (CJob* job = CScheduler::Instance().GetFinishedJob())
 	{
 		return job->GetId();
 	}
 	return ID_NONE;
 }
 
-GM_EXPORT gmreal_t b_sleep_job_create(gmreal_t duration)
+GM_EXPORT gmreal_t blib_sleep_job_create(gmreal_t duration)
 {
 	SleepJob* sleepJob = BCreateObject<SleepJob>();
 	sleepJob->mDuration = static_cast<long long>(duration);

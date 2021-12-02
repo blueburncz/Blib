@@ -2,18 +2,18 @@
 
 using namespace Jobs;
 
-Semaphore::Semaphore(unsigned count)
+CSemaphore::CSemaphore(unsigned count)
 	: mCount(count)
 {
 }
 
-Semaphore::~Semaphore()
+CSemaphore::~CSemaphore()
 {
 }
 
-void Semaphore::Acquire()
+void CSemaphore::Acquire()
 {
-	std::unique_lock<std::mutex> lock(mMutex);
+	std::unique_lock<std::mutex> lock(Mutex);
 	while (mCount == 0)
 	{
 		mCondVar.wait(lock);
@@ -21,10 +21,10 @@ void Semaphore::Acquire()
 	--mCount;
 }
 
-void Semaphore::Release()
+void CSemaphore::Release()
 {
 	{
-		std::unique_lock<std::mutex> lock(mMutex);
+		std::unique_lock<std::mutex> lock(Mutex);
 		++mCount;
 	}
 	mCondVar.notify_one();

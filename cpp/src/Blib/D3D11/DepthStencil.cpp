@@ -2,7 +2,7 @@
 
 using namespace D3D11;
 
-gmstring_t DepthStencil::mObjectType = "DepthStencil";
+gmstring_t DepthStencil::ObjectType = "DepthStencil";
 
 DepthStencil::DepthStencil()
 {
@@ -10,9 +10,9 @@ DepthStencil::DepthStencil()
 
 DepthStencil::~DepthStencil()
 {
-	if (mDepthStencilView != NULL)
+	if (DepthStencilView != NULL)
 	{
-		mDepthStencilView->Release();
+		DepthStencilView->Release();
 	}
 }
 
@@ -33,24 +33,24 @@ bool DepthStencil::Initialize(ID3D11Device* device, gmreal_t width, gmreal_t hei
 	desc.CPUAccessFlags = 0;
 	desc.MiscFlags = 0;
 
-	HRESULT res = device->CreateTexture2D(&desc, NULL, &mTexture);
+	HRESULT res = device->CreateTexture2D(&desc, NULL, &Texture);
 
 	if (FAILED(res))
 	{
 		return false;
 	}
 
-	mWidth = width;
-	mHeight = height;
+	Width = width;
+	Height = height;
 
 	return true;
 }
 
 ID3D11DepthStencilView* DepthStencil::GetDepthStencilView(ID3D11Device* device)
 {
-	if (mDepthStencilView == NULL)
+	if (DepthStencilView == NULL)
 	{
-		device->CreateDepthStencilView(mTexture, NULL, &mDepthStencilView);
+		device->CreateDepthStencilView(Texture, NULL, &DepthStencilView);
 	}
-	return mDepthStencilView;
+	return DepthStencilView;
 }

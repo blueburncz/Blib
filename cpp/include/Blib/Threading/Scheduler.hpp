@@ -1,9 +1,7 @@
 #pragma once
 
 #include "../common.hpp"
-#include "Job.hpp"
 #include "Semaphore.hpp"
-#include "Worker.hpp"
 #include <map>
 #include <mutex>
 #include <queue>
@@ -13,44 +11,44 @@
 
 namespace Jobs
 {
-	class Scheduler final
+	class CScheduler final
 	{
 	public:
-		static Scheduler& Instance();
+		static CScheduler& Instance();
 
-		~Scheduler();
+		~CScheduler();
 
 		/** Adds job to the queue of jobs awaiting for execution. */
-		void StartJob(Job* job);
+		void StartJob(class CJob* job);
 
 		/** Gets a job for a worker. Blocks until there is some available. */
-		Job* GetJob();
+		class CJob* GetJob();
 
 		/** Removes job from queue. */
-		bool RemoveJob(Job* job);
+		bool RemoveJob(class CJob* job);
 
 		/** Adds finished job. */
-		void AddFinishedJob(Job* job);
+		void AddFinishedJob(class CJob* job);
 
 		/** Returns nullptr if there are no finished jobs. */
-		Job* GetFinishedJob();
+		class CJob* GetFinishedJob();
 
 	private:
-		Scheduler();
+		CScheduler();
 
 		/** Jobs to be executed. */
-		std::vector<Job*> mJobsWaiting;
+		std::vector<class CJob*> JobsWaiting;
 
 		/** Finished jobs. */
-		std::queue<Job*> mJobsFinished;
+		std::queue<class CJob*> JobsFinished;
 
 		/** Workers executing the jobs. */
-		std::vector<Worker*> mWorkers;
+		std::vector<class CWorker*> Workers;
 
 		/** Mutex used for locking shared data structures. */
-		std::mutex mMutex;
+		std::mutex Mutex;
 
 		/** Semaphore used for notifying workers about new jobs. */
-		Semaphore mSemaphore;
+		CSemaphore Semaphore;
 	};
 }

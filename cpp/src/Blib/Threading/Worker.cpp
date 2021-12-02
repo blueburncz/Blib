@@ -1,26 +1,27 @@
 #include <Blib/Threading/Scheduler.hpp>
 #include <Blib/Threading/Worker.hpp>
+#include <Blib/Threading/Job.hpp>
 
 using namespace Jobs;
 
-Worker::Worker(Scheduler* scheduler)
-	: mScheduler(scheduler)
-	, mThread(std::thread(&Worker::Work, this))
+CWorker::CWorker(CScheduler* scheduler)
+	: Scheduler(scheduler)
+	, Thread(std::thread(&CWorker::Work, this))
 {
 }
 
-Worker::~Worker()
+CWorker::~CWorker()
 {
-	mRunning = false;
-	mThread.join();
+	Running = false;
+	Thread.join();
 }
 
-void Worker::Work()
+void CWorker::Work()
 {
-	while (mRunning)
+	while (Running)
 	{
-		Job* job = mScheduler->GetJob();
+		CJob* job = Scheduler->GetJob();
 		job->Execute();
-		mScheduler->AddFinishedJob(job);
+		Scheduler->AddFinishedJob(job);
 	}
 }

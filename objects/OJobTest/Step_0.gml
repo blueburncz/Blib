@@ -1,12 +1,12 @@
 while (true)
 {
-	var _job = b_get_finished_job();
-	if (_job == B_ID_NONE)
+	var _job = blib_get_finished_job();
+	if (_job == undefined)
 	{
 		break;
 	}
-	show_debug_message(b_object_get_type(_job) + " " + string(_job) + " finished!");
-	show_debug_message("Exists: " + string(b_object_exists(_job)));
-	b_object_destroy(_job);
-	show_debug_message("Exists: " + string(b_object_exists(_job)));
+	show_debug_message(_job.GetType() + " " + string(_job) + " finished!");
+	show_debug_message("Exists: " + string(_job.Exists()));
+	_job.Destroy();
+	show_debug_message("Exists: " + string(_job.Exists()));
 }
